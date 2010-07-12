@@ -1,0 +1,31 @@
+Setup
+~~~~~
+
+To install this template:
+
+1. Start mailgraph, be sure that .rrd files are created in /var/lib/mailgraph,
+verify permissions if they do not get created.
+
+2. adjust permissions that webserver is able to read the mailgraph .rrd files.
+
+3. Create graph via "New Graphs":
+select "Postfix Processing (Mailgraph)" for host and hit "Create"
+
+3. Change data templates point to .rrd files:
+for "Postfix Processing (Mailgraph)" choose /var/lib/mailgraph/mailgraph.rrd
+for "Postfix Processing Virus (Mailgraph)" choose /var/lib/mailgraph/mailgraph_virus.rrd
+
+Enjoy!
+
+Multiple graphs
+~~~~~~~~~~~~~~~
+
+To collect multiple graphs from different hosts, use syslog to route the mail
+logs to your cacti host.
+
+Use --host=HOST and --logfile and --daemon-rrd=DIR options to combine results
+for your needs.
+
+You could even merge results from mailhost1 and mailhost2 if you write their
+logs to single file with syslog and do not specify --host argument to
+mailgraph.pl daemon.

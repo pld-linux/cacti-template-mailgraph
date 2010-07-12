@@ -2,12 +2,13 @@
 Summary:	Mailgraph statistics template for Cacti
 Name:		cacti-template-%{template}
 Version:	0.1
-Release:	0.2
+Release:	0.3
 License:	GPL v2
 Group:		Applications/WWW
 Source0:	cacti_data_template_postfix_processing_mailgraph.xml
 Source1:	cacti_data_template_postfix_processing_virus_mailgraph.xml
 Source2:	cacti_graph_template_postfix_processing_mailgraph.xml
+Source3:	README
 URL:		http://forums.cacti.net/about1571.html
 BuildRequires:	rpmbuild(macros) >= 1.554
 Requires:	cacti
@@ -26,6 +27,7 @@ Template for Cacti - Mail statistics via mailgraph rrd files.
 cp -a %{SOURCE0} .
 cp -a %{SOURCE1} .
 cp -a %{SOURCE2} .
+cp -a %{SOURCE3} .
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -42,4 +44,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc README
 %{resourcedir}/*.xml
