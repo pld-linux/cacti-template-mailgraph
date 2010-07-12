@@ -29,3 +29,19 @@ for your needs.
 You could even merge results from mailhost1 and mailhost2 if you write their
 logs to single file with syslog and do not specify --host argument to
 mailgraph.pl daemon.
+
+for example via syslog-ng:
+1. server side (accepting logs):
+  source s_net { udp(); };
+  filter f_mail { facility(mail); };
+  destination mail_net {
+    file(
+       "/var/log/mail/$HOST" owner(root) group(http) perm(0640)
+       create_dirs(yes) dir_perm(0710) dir_owner(root) dir_group(http)
+    );
+  };
+  log { source(s_net); filter(f_mail); destination(mail_net); };
+
+2. client side (sending logs):
+destination maillog { udp("cactihost" port(514)); };
+log { source(s_sys); filter(f_mail); destination(maillog); };
